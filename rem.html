@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>rem练习</title>
+    <link rel="stylesheet" href="./src/assets/reset.min.css" />
+    <style>
+      /* 
+      实现rem响应式布局开发
+        1.参照比例，一般都是750，在这个比例下，给予html.fontSize一个初始值
+        2.我们需要根据当前设备的宽度，计算相对于设计稿750来讲，缩放的比例，从而让rem的转换比例，也跟着缩放
+
+      
+      */
+      html {
+        font-size: 100px;
+      }
+
+      #root {
+        width: 750px;
+      }
+      .box {
+        width: 3.28rem;
+        height: 1.64rem;
+        line-height: 1.64rem;
+        text-align: center;
+        font-size: 0.4rem;
+        background: lightblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div class="box">rem</div>
+    </div>
+
+    <script>
+      /** 计算当前设备下,rem和px的换算比例*/
+      (function () {
+        const computed = () => {
+          //获取当前设备的宽度
+          let html = document.documentElement,
+            deviceW = html.clientWidth,
+            designW = 750;
+          if (deviceW >= designW) {
+            html.style.fontSize = '100px';
+            return;
+          }
+          let radio = (deviceW * 100) / designW;
+          html.style.fontSize = radio + 'px';
+        };
+        computed();
+        window.addEventListener('resize', computed);
+      })();
+    </script>
+  </body>
+</html>
