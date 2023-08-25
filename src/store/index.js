@@ -13,6 +13,6 @@ if (env === 'development') {
   middleware.push(reduxLogger);
 }
 
-const store = createStore(reducer, applyMiddleware([...middleware]));
+const store = createStore(reducer, applyMiddleware(...middleware));
 
 export default store;
